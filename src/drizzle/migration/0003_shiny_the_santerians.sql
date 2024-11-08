@@ -1,0 +1,2 @@
+ALTER TABLE "scheduleAvailabilities" ADD COLUMN "createdAt" timestamp DEFAULT now() NOT NULL;--> statement-breakpoint
+ALTER TABLE "scheduleAvailabilities" ADD COLUMN "updatedAt" timestamp DEFAULT now() NOT NULL;
