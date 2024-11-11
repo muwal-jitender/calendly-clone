@@ -15,6 +15,8 @@ import { cn } from "@/lib/utils";
 import { db } from "@/drizzle/db";
 import { formatEventDescription } from "@/lib/formatters";
 
+export const revalidate = 0;
+
 export default async function EventsPage() {
   const { userId, redirectToSignIn } = await auth();
   if (userId == null) return redirectToSignIn();

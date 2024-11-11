@@ -4,10 +4,7 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 import type { Metadata } from "next";
 
-const geistSans = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 // const geistMono = localFont({
 //   src: "./fonts/GeistMonoVF.woff",
 //   variable: "--font-geist-mono",
@@ -28,7 +25,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`min-h-screen, bg-background, ${geistSans.variable}  antialiased`}
+          className={`min-h-screen, bg-background, ${inter.variable}  antialiased`}
         >
           {children}
         </body>
