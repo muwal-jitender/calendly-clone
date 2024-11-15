@@ -8,3 +8,12 @@ export const formatEventDescription = (durationInMinutes: number) => {
   if (minutes === 0) return hoursString;
   return hoursString + " " + minutesString;
 };
+
+export const formatTimezoneOffset = (timezone: string) => {
+  return new Intl.DateTimeFormat(undefined, {
+    timeZone: timezone,
+    timeZoneName: "shortOffset",
+  })
+    .formatToParts(new Date())
+    .find((part) => part.type == "timeZoneName")?.value;
+};
