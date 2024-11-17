@@ -7,6 +7,7 @@ import {
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
@@ -20,9 +21,7 @@ import {
   FormMessage,
 } from "../ui/form";
 import { createEvent, deleteEvent, updateEvent } from "@/server/actions/events";
-import { useState, useTransition } from "react";
 
-import { AlertDialogHeader } from "../ui/alert-dialog";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import Link from "next/link";
@@ -30,6 +29,7 @@ import { Switch } from "../ui/switch";
 import { Textarea } from "../ui/textarea";
 import { eventFormSchema } from "@/schema/events";
 import { useForm } from "react-hook-form";
+import { useTransition } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -47,15 +47,18 @@ export function EventForm({
   const [isDeletePending, startDeleteTransition] = useTransition();
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
-    defaultValues: event ?? {
-      isActive: true,
-      durationInMinutes: 30,
+    defaultValues: {
+      name: event?.name || "",
+      description: event?.description || "",
+      durationInMinutes: event?.durationInMinutes || 30,
+      isActive: event?.isActive ?? true,
     },
   });
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
     const action =
       event == null ? createEvent : updateEvent.bind(null, event.id);
     const data = await action(values);
+
     if (data?.error) {
       form.setError("root", {
         message: "There was an error saving your event",
@@ -104,7 +107,6 @@ export function EventForm({
             </FormItem>
           )}
         />
-
         <FormField
           control={form.control}
           name="description"
@@ -112,7 +114,7 @@ export function EventForm({
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea className="resize none h-32" {...field} />
+                <Textarea className="resize-none h-32" {...field} />
               </FormControl>
               <FormDescription>
                 Optional description of the event
@@ -138,7 +140,6 @@ export function EventForm({
               <FormDescription>
                 Inactive events will not be visible for users to book
               </FormDescription>
-              <FormMessage />
             </FormItem>
           )}
         />
@@ -157,8 +158,8 @@ export function EventForm({
                 <AlertDialogHeader>
                   <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                   <AlertDialogDescription>
-                    This action cannot be undone. This wil permanently delete
-                    this event
+                    This action cannot be undone. This will permanently delete
+                    your this event.
                   </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
@@ -169,6 +170,7 @@ export function EventForm({
                     onClick={() => {
                       startDeleteTransition(async () => {
                         const data = await deleteEvent(event.id);
+
                         if (data?.error) {
                           form.setError("root", {
                             message: "There was an error deleting your event",
@@ -183,6 +185,7 @@ export function EventForm({
               </AlertDialogContent>
             </AlertDialog>
           )}
+
           <Button
             disabled={isDeletePending || form.formState.isSubmitting}
             type="button"
