@@ -1,4 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Smart Scheduler
+
+## Project Overview
+
+**Smart Scheduler** is a modern, user-friendly scheduling application inspired by **Calendly**. It simplifies scheduling by allowing users to define their availability, create events, and share booking links with others. Designed with time zone intelligence and seamless calendar integration, it ensures effortless and error-free scheduling across the globe.
+
+---
+
+## Key Features
+
+- **Event Management**:  
+  Create and manage events with custom durations, descriptions, and settings.
+- **Availability Scheduling**:  
+  Define weekly availability slots (e.g., Mon-Fri, 9:00 AM–5:00 PM) and avoid conflicts with overlapping events.
+- **Time Zone Flexibility**:  
+  Automatic time zone detection for invitees with an option to manually select a preferred time zone.
+- **Real-Time Booking**:  
+  Share booking links with clients or colleagues, allowing them to book events within your defined availability.
+- **Google Calendar Integration**:  
+  Sync events directly to Google Calendar, ensuring all meetings are organized and accessible.
+- **Responsive Design**:  
+  Optimized for both desktop and mobile devices for a seamless user experience.
+
+---
+
+## How It Works
+
+1. **Set Availability**: Define your weekly availability, specifying the days and times you’re free for meetings.
+2. **Create Events**: Create personalized event types with custom durations (e.g., 30-minute meeting, interview).
+3. **Share Booking Links**: Share event links via email or messaging platforms with clients or invitees.
+4. **Book and Confirm**: Invitees book meetings based on your availability, with automatic time zone adjustments.
+5. **Stay Organized**: Scheduled events are synced with your calendar, and both parties receive reminders.
+
+---
+
+## Tech Stack
+
+- **Frontend**: React, Next.js, Tailwind CSS
+- **Backend**: Node.js, Express.js (or equivalent backend framework)
+- **Database**: PostgreSQL with Drizzle ORM
+- **Calendar Integration**: Google Calendar API
+- **Time Zone Handling**: date-fns, date-fns-tz
+- **Authentication**: Clerk for user management
+
+---
 
 ## Getting Started
 
@@ -15,6 +59,14 @@ bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Environment variables configured in a `.env` file. The complete list of of them can be found in `.env.sample` file in the repository.
+
+```env
+NEXT_PUBLIC_GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+DATABASE_URL=
+```
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
@@ -38,3 +90,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ## Install a new UI component
 
 npx shadcn@latest add form
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.

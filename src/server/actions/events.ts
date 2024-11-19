@@ -15,11 +15,13 @@ export async function createEvent(
   unsafeData: z.infer<typeof eventFormSchema>
 ): Promise<{ error: boolean } | undefined> {
   const { userId } = await auth();
+  console.log("Creating event with unsafe-data:", unsafeData);
 
   const { success, data } = eventFormSchema.safeParse(unsafeData);
   if (!success || userId == null) {
     return { error: true };
   }
+  console.log("Creating event with data:", unsafeData);
   await db.insert(EventTable).values({ ...data, clerkUserId: userId });
 
   redirect("/events");

@@ -17,7 +17,7 @@ export const NavLink = ({
       className={cn(
         "transition-colors",
         isActive
-          ? "text-background"
+          ? "text-foreground"
           : "text-muted-foreground hover:text-foreground",
         className
       )}

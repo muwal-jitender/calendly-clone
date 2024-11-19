@@ -114,7 +114,7 @@ export function ScheduleForm({
                 </SelectContent>
               </Select>
               <FormDescription>
-                The name users will see when booking
+                Select your availability for bookings
               </FormDescription>
               <FormMessage />
             </FormItem>

@@ -47,22 +47,25 @@ export function EventForm({
   const [isDeletePending, startDeleteTransition] = useTransition();
   const form = useForm<z.infer<typeof eventFormSchema>>({
     resolver: zodResolver(eventFormSchema),
-    defaultValues: {
-      name: event?.name || "",
-      description: event?.description || "",
-      durationInMinutes: event?.durationInMinutes || 30,
-      isActive: event?.isActive ?? true,
+    defaultValues: event ?? {
+      isActive: true,
+      durationInMinutes: 30,
     },
   });
+  console.log("Form state errors:", form.formState.errors);
+
   async function onSubmit(values: z.infer<typeof eventFormSchema>) {
     const action =
       event == null ? createEvent : updateEvent.bind(null, event.id);
     const data = await action(values);
 
     if (data?.error) {
+      console.error("Error:", data.error);
       form.setError("root", {
         message: "There was an error saving your event",
       });
+    } else {
+      console.log("Event saved successfully:", data);
     }
   }
 
