@@ -15,11 +15,13 @@ import {
 
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { MeetingForm } from "@/components/forms/MeetingForm";
 import { clerkClient } from "@clerk/nextjs/server";
 import { db } from "@/drizzle/db";
 import { getValidTimesFromSchedule } from "@/lib/getValidTimesFromSchedule";
 import { notFound } from "next/navigation";
 
+export const revalidate = 0;
 export default async function BookEventPage({
   params,
 }: {
@@ -48,10 +50,28 @@ export default async function BookEventPage({
   const validTimes = await getValidTimesFromSchedule(intervals, event);
   console.log("Filtered Valid Times:", validTimes);
 
-  if (validTimes.length !== 0) {
+  if (validTimes.length === 0) {
     return <NoTimeSlots event={event} calendarUser={calendarUser} />;
   }
-  return <h1>Hi</h1>;
+  return (
+    <Card className="max-w-md mx-auto">
+      <CardHeader>
+        <CardTitle>
+          Book {event.name} with {calendarUser.fullName}
+        </CardTitle>
+        {event.description && (
+          <CardDescription>{event.description}</CardDescription>
+        )}
+      </CardHeader>
+      <CardContent>
+        <MeetingForm
+          validTimes={validTimes}
+          eventId={event.id}
+          clerkUserId={clerkUserId}
+        />
+      </CardContent>
+    </Card>
+  );
 }
 
 function NoTimeSlots({
