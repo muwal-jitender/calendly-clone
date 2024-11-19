@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Smart Scheduler** is a modern, user-friendly scheduling application inspired by **Calendly**. It simplifies scheduling by allowing users to define their availability, create events, and share booking links with others. Designed with time zone intelligence and seamless calendar integration, it ensures effortless and error-free scheduling across the globe.
+**Smart Event Scheduler** is a modern, user-friendly scheduling application inspired by **Calendly**. It simplifies scheduling by allowing users to define their availability, create events, and share booking links with others. Designed with time zone intelligence and seamless calendar integration, it ensures effortless and error-free scheduling across the globe.
 
 ---
 
@@ -29,15 +29,16 @@
 2. **Create Events**: Create personalized event types with custom durations (e.g., 30-minute meeting, interview).
 3. **Share Booking Links**: Share event links via email or messaging platforms with clients or invitees.
 4. **Book and Confirm**: Invitees book meetings based on your availability, with automatic time zone adjustments.
-5. **Stay Organized**: Scheduled events are synced with your calendar, and both parties receive reminders.
+5. **Stay Organized**: Scheduled events are synced with your Google calendar, and both parties receive reminders.
 
 ---
 
 ## Tech Stack
 
 - **Frontend**: React, Next.js, Tailwind CSS
-- **Backend**: Node.js, Express.js (or equivalent backend framework)
-- **Database**: PostgreSQL with Drizzle ORM
+- **Backend**: Powered by Next.js, utilizing API Routes and Server-Side Rendering (SSR) for efficient and seamless backend functionality.
+
+- **Database**: Neon PostgreSQL, a cloud-native PostgreSQL solution for scalable and reliable database management with Drizzle ORM
 - **Calendar Integration**: Google Calendar API
 - **Time Zone Handling**: date-fns, date-fns-tz
 - **Authentication**: Clerk for user management
