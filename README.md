@@ -1,4 +1,4 @@
-# Smart Scheduler
+# Smart Event Scheduler
 
 ## Project Overview
 
